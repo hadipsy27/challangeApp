@@ -1,9 +1,8 @@
 package com.labs.challangeApp;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +16,28 @@ public class ChallengeController {
     }
 
     @GetMapping("/challenges")
-    public List<Challenge> getAllChallanges() {
-        return challengeService.getAllChallenges();
+    public ResponseEntity<List<Challenge>> getAllChallenges() {
+        return new ResponseEntity<>(challengeService.getAllChallenges(), HttpStatus.OK);
     }
 
     @PostMapping("/challenges")
-    public String addChallenge(@RequestBody Challenge challenge){
+    public ResponseEntity<String> addChallenge(@RequestBody Challenge challenge){
         boolean isChallengeAdded = challengeService.addChallenge(challenge);
         if(isChallengeAdded){
-            return "Challenge added successfully";
+            return new ResponseEntity<>("Challenge added successfully", HttpStatus.OK);
         } else  {
-            return "Challenge could not be added";
+            return new ResponseEntity<>("Challenge could not be added", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/challenges/{month}")
+    public ResponseEntity<Challenge> getChallenge(@PathVariable String month) {
+        Challenge challenge = challengeService.getChallenge(month);
+        if (challenge != null) {
+            return new ResponseEntity<>(challenge, HttpStatus.OK);
+        } else  {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
