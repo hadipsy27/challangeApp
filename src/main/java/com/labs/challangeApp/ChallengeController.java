@@ -50,4 +50,14 @@ public class ChallengeController {
         }
     }
 
+    @DeleteMapping("challenges/{id}")
+    public ResponseEntity<String> deleteChallenge(@PathVariable Long id) {
+        boolean isChallengeDeleted = challengeService.deleteChallenge(id);
+        if(isChallengeDeleted){
+            return new ResponseEntity<>("Challenge deleted successfully", HttpStatus.OK);
+        } else  {
+            return new ResponseEntity<>("Challenge could not be deleted", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
