@@ -5,27 +5,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ChallangeController {
 
-    private List<Challange> challanges = new ArrayList<>();
+    private ChallengeService challengeService;
 
-    public ChallangeController() {
-        Challange challange1 = new Challange(1L, "January", "Learn a new programming language");
-        challanges.add(challange1);
+    public ChallangeController(ChallengeService challengeService) {
+        this.challengeService = challengeService;
     }
 
     @GetMapping("/challanges")
     public List<Challange> getAllChallanges() {
-        return challanges;
+        return challengeService.getAllChallenges();
     }
 
     @PostMapping("/challanges")
     public String addChallange(@RequestBody Challange challange){
-        challanges.add(challange);
-        return "Challange added successfully";
+        boolean isChallengeAdded = challengeService.addChallange(challange);
+        if(isChallengeAdded){
+            return "Challange added successfully";
+        } else  {
+            return "Challange could not be added";
+        }
     }
 }
