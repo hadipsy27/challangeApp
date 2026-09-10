@@ -1,12 +1,12 @@
 package com.labs.challangeApp;
 
-public class Challange {
+public class Challenge {
 
     private Long id;
     private String month;
     private String description;
 
-    public Challange(Long id, String month, String description) {
+    public Challenge(Long id, String month, String description) {
         this.id = id;
         this.month = month;
         this.description = description;

@@ -8,21 +8,21 @@ import java.util.List;
 @Service
 public class ChallengeService {
 
-    private List<Challange> challanges = new ArrayList<>();
+    private List<Challenge> challenges = new ArrayList<>();
     private Long nextId = 1L;
 
     public ChallengeService(){
     }
 
 
-    public List<Challange> getAllChallenges(){
-        return challanges;
+    public List<Challenge> getAllChallenges(){
+        return challenges;
     }
 
-    public boolean addChallange(Challange challange){
-        if(challange != null){
-            challange.setId(nextId++);
-            challanges.add(challange);
+    public boolean addChallenge(Challenge challenge){
+        if(challenge != null){
+            challenge.setId(nextId++);
+            challenges.add(challenge);
             return true;
         } else {
             return false;

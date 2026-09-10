@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ChallangeController {
+public class ChallengeController {
 
     private ChallengeService challengeService;
 
-    public ChallangeController(ChallengeService challengeService) {
+    public ChallengeController(ChallengeService challengeService) {
         this.challengeService = challengeService;
     }
 
-    @GetMapping("/challanges")
-    public List<Challange> getAllChallanges() {
+    @GetMapping("/challenges")
+    public List<Challenge> getAllChallanges() {
         return challengeService.getAllChallenges();
     }
 
-    @PostMapping("/challanges")
-    public String addChallange(@RequestBody Challange challange){
-        boolean isChallengeAdded = challengeService.addChallange(challange);
+    @PostMapping("/challenges")
+    public String addChallenge(@RequestBody Challenge challenge){
+        boolean isChallengeAdded = challengeService.addChallenge(challenge);
         if(isChallengeAdded){
-            return "Challange added successfully";
+            return "Challenge added successfully";
         } else  {
-            return "Challange could not be added";
+            return "Challenge could not be added";
         }
     }
 }
