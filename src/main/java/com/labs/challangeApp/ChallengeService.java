@@ -1,5 +1,6 @@
 package com.labs.challangeApp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ public class ChallengeService {
 
     private List<Challenge> challenges = new ArrayList<>();
     private Long nextId = 1L;
+
+    @Autowired
+    ChallengeRepository challengeRepository;
 
     public ChallengeService(){
     }
@@ -22,7 +26,7 @@ public class ChallengeService {
     public boolean addChallenge(Challenge challenge){
         if(challenge != null){
             challenge.setId(nextId++);
-            challenges.add(challenge);
+            challengeRepository.save(challenge);
             return true;
         } else {
             return false;
